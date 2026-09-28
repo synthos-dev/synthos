@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+set -xeuo pipefail
+
+stat /usr/share/pki/containers/synthos.pub
+grep -F -e "ghcr.io/synthos-dev" /etc/containers/policy.json

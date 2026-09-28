@@ -1,0 +1,33 @@
+name: Build SynthOS (Main)
+
+permissions:
+  contents: read
+  packages: write
+  id-token: write
+
+on:
+  push:
+  pull_request:
+    branches:
+      - main
+  schedule:
+    - cron: "0 1 * * TUE"
+  merge_group:
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref || github.run_id }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    uses: ./.github/workflows/reusable-build-bootc.yaml
+    secrets: inherit
+    with:
+      image-name: synthos
+      platforms: amd64,arm64
+      image-description: "Operating system for VR enthusiasts"
+      image-license: "Apache-2.0"
+      image-keywords: "bootc,openxr,vr"
+      profiles: base,base-desktop,bootc-ostree,brew,synthos-bootc-ostree
+      publish: ${{ github.event_name != 'pull_request' && github.ref == format('refs/heads/{0}', github.event.repository.default_branch) }}

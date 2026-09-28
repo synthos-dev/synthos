@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+set -xeuo pipefail
+
+mkdir -p "${SRCDIR}/cache"
+
+if [ ! -e "${SRCDIR}/cache/flathub.flatpakrepo" ] ; then
+	"${SRCDIR}/subprojects/ghcurl" "https://dl.flathub.org/repo/flathub.flatpakrepo" -o "${SRCDIR}/cache/flathub.flatpakrepo"
+fi
