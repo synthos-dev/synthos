@@ -13,3 +13,7 @@ just --completions fish | sed -E 's/([\(_" ])just/\1zjust/g' > /usr/share/fish/v
 grep -F -e "Comment=Central repository of Flatpak applications" /usr/share/flatpak/remotes.d/flathub.flatpakrepo
 stat /usr/share/flatpak/remotes.d/flathub.flatpakrepo
 # stat /usr/share/synthos/just/00-start.just
+
+# We use plasma's setup instead of anything systemd-firstboot related, this still gets started even if manually masked/disabled due to it being a static service
+# FIXME: Find gentler fix for this
+rm /usr/lib/systemd/system/systemd-firstboot*.service

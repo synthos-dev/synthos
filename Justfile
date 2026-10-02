@@ -10,6 +10,7 @@ iterate-bootc:
     sudo just lint
     sudo just rechunk
     sudo env BUILD_BASE_DIR=/tmp just disk-image
+    sudo chown "$(id -nu):$(id -nu)" /tmp/bootable.img
     vmbuddy -f /tmp/bootable.img
 
 build: build-ostree
@@ -37,7 +38,6 @@ bootc *ARGS:
         --ipc=host \
         -v ./bootc:/usr/bin/bootc:Z \
         -v /var/lib/containers:/var/lib/containers \
-        -v /etc/containers:/etc/containers \
         -v /dev:/dev \
         --security-opt label=type:unconfined_t \
         -v "${BUILD_BASE_DIR:-.}:/data" \

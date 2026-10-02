@@ -23,7 +23,9 @@
             "ghcr.io/synthos-dev": [
                 {
                     "type": "sigstoreSigned",
-                    "keyPath": "/usr/share/pki/containers/synthos.pub"
+                    "keyPaths": [
+                        "/usr/share/pki/containers/synthos.pub"
+                    ],
                     "signedIdentity": {
                         "type": "matchRepository"
                     }
